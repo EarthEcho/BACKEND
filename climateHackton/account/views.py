@@ -44,7 +44,7 @@ class UserDeleteAPIView(APIView):
 
 
 class ProfileAPIView(APIView):
-    # permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated, )
     serializer_class = ProfileSerializer
 
     def get(self, request):
@@ -56,7 +56,7 @@ class ProfileAPIView(APIView):
 
 
 class ProfileRetrieveUpdateDelete(APIView):
-    # permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated, )
     parser_classes = (MultiPartParser, FormParser)
     serializer_class = ProfileSerializer
 
