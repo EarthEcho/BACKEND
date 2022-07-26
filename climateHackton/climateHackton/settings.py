@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # apps
     'api',
     'account',
+    'edu',
 ]
 
 MIDDLEWARE = [
