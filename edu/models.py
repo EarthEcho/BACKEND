@@ -9,7 +9,7 @@ class ClimateEducation(models.Model):
     """
     Climate Education Model
     """
-    name = models.CharField(max_length=255)
+    topic = models.CharField(max_length=300)
     articles = models.TextField(blank=True)
     image = models.ImageField(upload_to=updload_to, blank=True)
     video_url = models.URLField(max_length=255, blank=True)
@@ -26,8 +26,7 @@ class ClimateFact(models.Model):
     """
     Climate Fact Model
     """
-    name = models.CharField(max_length=255)
-    description = models.TextField(blank=True)
+    facts = models.TextField(blank=True)
     image = models.ImageField(upload_to=updload_to, blank=True)
     url = models.URLField(max_length=255, blank=True)
 
