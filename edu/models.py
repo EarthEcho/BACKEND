@@ -13,9 +13,11 @@ class ClimateEducation(models.Model):
     articles = models.TextField(blank=True)
     image = models.ImageField(upload_to=updload_to, blank=True)
     video_url = models.URLField(max_length=255, blank=True)
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return self.topic
 
     class Meta:
         verbose_name = 'Climate Education'
@@ -29,9 +31,11 @@ class ClimateFact(models.Model):
     facts = models.TextField(blank=True)
     image = models.ImageField(upload_to=updload_to, blank=True)
     url = models.URLField(max_length=255, blank=True)
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return str(self.id)
 
     class Meta:
         verbose_name = 'Climate Fact'
