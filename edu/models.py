@@ -17,7 +17,7 @@ class ClimateEducation(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.topic
+        return f'{self.topic} id of {str(self.id)}'
 
     class Meta:
         verbose_name = 'Climate Education'
