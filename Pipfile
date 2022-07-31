@@ -10,6 +10,7 @@ pillow = "*"
 drf-yasg = "*"
 requests = "*"
 django-heroku = "*"
+django-environ = "*"
 
 [dev-packages]
 
