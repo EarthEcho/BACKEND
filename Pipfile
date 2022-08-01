@@ -12,6 +12,7 @@ requests = "*"
 django-heroku = "*"
 django-environ = "*"
 gunicorn = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 
