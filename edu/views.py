@@ -12,7 +12,7 @@ from .serializers import (
 
 class ClimateEducationListView(APIView):
     serializer_class = ClimateEducationSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     """
     Climate Education View
     """
@@ -31,6 +31,7 @@ class ClimateEducationListView(APIView):
 
 class ClimateEducationDetailUpdateDeleteView(APIView):
     serializer_class = ClimateEducationSerializer
+    permission_classes = [IsAuthenticated]
     """
     Climate Education Detail, Update, and Delete View.
     """
@@ -79,6 +80,7 @@ class ClimateEducationDetailUpdateDeleteView(APIView):
 
 class ClimateFactListView(APIView):
     serializer_class = ClimateFactSerializer
+    permission_classes = [IsAuthenticated]
     """
     Climate Fact View
     """
@@ -97,6 +99,7 @@ class ClimateFactListView(APIView):
 
 class ClimateFactDetailUpdateDeleteView(APIView):
     serializer_class = ClimateFactSerializer
+    permission_classes = [IsAuthenticated]
     """
     Climate Fact Detail, Update, and Delete View.
     """
