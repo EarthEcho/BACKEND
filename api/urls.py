@@ -4,7 +4,9 @@ from account.views import (
     user_list_create,
     user_delete,
     profile_list,
-    profile_detail_update_delete
+    profile_detail_update,
+
+    CustomAuthToken
 )
 
 from edu.views import (
@@ -18,8 +20,8 @@ urlpatterns = [
     path('user/', user_list_create, name='user-list-create'),
     path('user/delete/account/', user_delete, name='user-delete'),
     path('author/', profile_list, name='profile-lsit'),
-    path('author/<str:pk>/', profile_detail_update_delete,
-         name='profile_detail_update_delete'),
+    path('author/<str:pk>/', profile_detail_update,
+         name='profile_detail_update'),
 
     #  edu
     path('climate/', climateEducation_list, name='climate-list'),
@@ -29,6 +31,6 @@ urlpatterns = [
     path('climate/fact/<int:pk>/', climateFact_detail_update_delete,
          name='climate-fact-detail-update-delete'),
 
-    path('login/', obtain_auth_token)
+    path('login/', CustomAuthToken.as_view())
 
 ]

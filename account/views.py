@@ -8,6 +8,8 @@ from .serializers import UserSerializer
 from rest_framework import status
 from .models import Profile
 
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
 
 User = get_user_model()
 
@@ -35,7 +37,6 @@ class UserDeleteAPIView(APIView):
 
     def delete(self, request):
         user = request.user.pk
-        print(user)
         profile = User.objects.get(pk=user)
         if profile:
             profile.delete()
@@ -44,7 +45,7 @@ class UserDeleteAPIView(APIView):
 
 
 class ProfileAPIView(APIView):
-    permission_classes = (IsAuthenticated, )
+    permission_classes = [IsAuthenticated]
     serializer_class = ProfileSerializer
 
     def get(self, request):
@@ -55,10 +56,11 @@ class ProfileAPIView(APIView):
         return Response({'Message': 'No Profile.'})
 
 
-class ProfileRetrieveUpdateDelete(APIView):
-    # permission_classes = (IsAuthenticated, )
+class ProfileRetrieveUpdate(APIView):
     parser_classes = (MultiPartParser, FormParser)
     serializer_class = ProfileSerializer
+    permission_classes = [IsAuthenticated]
+
 
     def get_object(self, pk):
         try:
@@ -84,7 +86,26 @@ class ProfileRetrieveUpdateDelete(APIView):
         return Response(status.HTTP_404_NOT_FOUND)
 
 
+class CustomAuthToken(ObtainAuthToken):
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data,
+                                           context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            'token': token.key,
+            'user_id': user.pk,
+            'author_id': user.user_profile.id,
+            'email': user.email,
+            'username': user.username
+        })
+
+
 user_list_create = UserAPIView.as_view()
 user_delete = UserDeleteAPIView.as_view()
 profile_list = ProfileAPIView.as_view()
-profile_detail_update_delete = ProfileRetrieveUpdateDelete.as_view()
+profile_detail_update = ProfileRetrieveUpdate.as_view()
+
+
